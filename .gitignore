@@ -1,0 +1,22 @@
+# segredos
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# dependências e build
+node_modules/
+dist/
+
+# lixo de sistema
+.DS_Store
+__MACOSX/
+
+# rascunho de sessão (aula 3: handoff é efêmero, não versiona)
+handoff.md
+
+# artefatos do `tsc -b`
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+src/generated/
