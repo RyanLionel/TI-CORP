@@ -26,7 +26,10 @@ Em conflito, rules/ e docs/adr/ vencem esta skill.
 3. PARE e peça a revisão humana das 12 fotos (references/revisao-visual.md). O agente não marca `aprovada`.
 4. Foto reprovada (`"aprovada": false` com `motivo`): rode o preparar de novo; ele guarda a reprovada no
    histórico e busca outra.
-5. Com as 12 em `"aprovada": true`, o envio sobe as fotos para o bucket público `equipamentos` e grava o
+5. Item difícil (reprovado em várias rodadas): `npm run imagens:candidatos -- TI-0005` baixa até 8 opções
+   em `tmp/candidatos/TI-0005/`; o humano olha e escolhe com `npm run imagens:escolher -- TI-0005=<id>`
+   (a escolha humana já conta como aprovação; a foto anterior vai para o histórico).
+6. Com as 12 em `"aprovada": true`, o envio sobe as fotos para o bucket público `equipamentos` e grava o
    crédito no banco. Repetir não duplica (objeto = `<patrimonio>.jpg`, sobrescrito).
 
 ## Garantido por código (scripts/)

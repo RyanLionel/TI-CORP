@@ -34,6 +34,12 @@ describe('skill imagens-equipamentos (spec 002)', () => {
     expect(lib.escolher(c, { usadas: new Set(['1', '2', '3']), reprovadas: new Set() })).toBeNull()
   })
 
+  it('CA-05: filtrar devolve até N candidatos, sem usadas, reprovadas nem suspeitas', () => {
+    const c = [1, 2, 3, 4, 5].map((id) => ({ id, tags: id === 4 ? 'man, laptop' : 'laptop' }))
+    const r = lib.filtrar(c, { usadas: new Set(['1']), reprovadas: new Set(['2']) }, 2)
+    expect(r.map((x: { id: number }) => x.id)).toEqual([3, 5])
+  })
+
   it('CA-10: a triagem descarta tags com pessoa, mão, marca ou texto', () => {
     expect(lib.tagsSuspeitas('laptop, man, office')).toBe(true)
     expect(lib.tagsSuspeitas('hands, typing, keyboard')).toBe(true)

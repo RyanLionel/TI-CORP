@@ -18,7 +18,8 @@ const RAIZ = process.cwd()
 const PASTA = process.env.IMAGENS_DIR ?? join(RAIZ, 'tmp', 'imagens')
 const REVISAO = process.env.REVISAO_ARQUIVO ?? join(RAIZ, 'scripts', 'dados-iniciais', 'revisao-imagens.json')
 const equipamentos = JSON.parse(readFileSync(join(RAIZ, 'scripts', 'dados-iniciais', 'equipamentos.json'), 'utf8'))
-const revisao = existsSync(REVISAO) ? JSON.parse(readFileSync(REVISAO, 'utf8')) : {}
+// editores do Windows podem gravar BOM no início do arquivo
+const revisao = existsSync(REVISAO) ? JSON.parse(readFileSync(REVISAO, 'utf8').replace(/^\uFEFF/, '')) : {}
 mkdirSync(PASTA, { recursive: true })
 
 const espera = (ms) => new Promise((r) => setTimeout(r, ms))

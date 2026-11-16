@@ -42,7 +42,7 @@ if (remoto && env.SEED_CONFIRM_REMOTE !== 'sim') {
 }
 
 if (!existsSync(REVISAO)) fail(`não achei ${REVISAO}. Rode npm run imagens:preparar.`)
-const revisao = JSON.parse(readFileSync(REVISAO, 'utf8'))
+const revisao = JSON.parse(readFileSync(REVISAO, 'utf8').replace(/^\uFEFF/, '')) // editores do Windows podem gravar BOM
 const equipamentos = JSON.parse(readFileSync(env.EQUIPAMENTOS_ARQUIVO ?? join(RAIZ, 'scripts', 'dados-iniciais', 'equipamentos.json'), 'utf8'))
 
 // CA-10: só envia com as 12 aprovadas pela revisão humana.

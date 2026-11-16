@@ -16,7 +16,9 @@
     "seed:dados-iniciais": "node scripts/seed-dados-iniciais.mjs",
     "imagens:preparar": "node skills/imagens-equipamentos/scripts/preparar-imagens.mjs",
     "imagens:enviar:local": "node skills/imagens-equipamentos/scripts/enviar-imagens.mjs --local",
-    "imagens:enviar": "node skills/imagens-equipamentos/scripts/enviar-imagens.mjs"
+    "imagens:enviar": "node skills/imagens-equipamentos/scripts/enviar-imagens.mjs",
+    "imagens:candidatos": "node skills/imagens-equipamentos/scripts/candidatos-imagens.mjs",
+    "imagens:escolher": "node skills/imagens-equipamentos/scripts/escolher-imagem.mjs"
   },
   "dependencies": {
     "@nestjs/common": "11.2.8",

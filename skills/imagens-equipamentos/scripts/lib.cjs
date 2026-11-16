@@ -40,6 +40,18 @@ function escolher(candidatos, { usadas, reprovadas }) {
   return null
 }
 
+// CA-05: até `max` candidatos válidos (para o humano escolher entre vários de uma vez).
+function filtrar(candidatos, { usadas, reprovadas }, max) {
+  const out = []
+  for (const c of candidatos) {
+    const id = String(c.id)
+    if (usadas.has(id) || reprovadas.has(id) || tagsSuspeitas(c.tags)) continue
+    out.push(c)
+    if (out.length >= max) break
+  }
+  return out
+}
+
 // CA-06: origem, autor e licença de cada imagem.
 function credito(hit) {
   return { source_id: String(hit.id), fotografo: hit.user, source_url: hit.pageURL, licenca: LICENCA }
@@ -64,4 +76,4 @@ function urlBusca(key, termo) {
   return `https://pixabay.com/api/?${p}`
 }
 
-module.exports = { LARGURA, ALTURA, LICENCA, BUCKET, normalizar, verificarDimensoes, tagsSuspeitas, escolher, credito, caminhoObjeto, urlBusca }
+module.exports = { LARGURA, ALTURA, LICENCA, BUCKET, normalizar, verificarDimensoes, tagsSuspeitas, escolher, filtrar, credito, caminhoObjeto, urlBusca }
