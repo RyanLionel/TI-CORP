@@ -1,4 +1,4 @@
-// Spec 001 · T3 · regras de empréstimo no banco (CA-01 a CA-07).
+// Spec 001 · T3 e T4 · regras de empréstimo no banco (CA-01 a CA-07), autenticação e RLS (CA-08, CA-09).
 // Roda contra o banco LOCAL (rules/tests.md): sem mock, a coisa sob teste são as funções e o trigger.
 import { Pool, PoolClient } from 'pg'
 
@@ -37,6 +37,24 @@ async function asUser<T>(uid: string, fn: (c: PoolClient) => Promise<T>): Promis
     await c.query('begin')
     await c.query('set local role authenticated')
     await c.query(`select set_config('request.jwt.claims', $1, true)`, [JSON.stringify({ sub: uid, role: 'authenticated' })])
+    const result = await fn(c)
+    await c.query('commit')
+    return result
+  } catch (e) {
+    await c.query('rollback')
+    throw e
+  } finally {
+    c.release()
+  }
+}
+
+// Executa com um papel do Postgres e, opcionalmente, um usuário (sub) nos claims.
+async function asRole<T>(role: 'anon' | 'authenticated', uid: string | null, fn: (c: PoolClient) => Promise<T>): Promise<T> {
+  const c = await pool.connect()
+  try {
+    await c.query('begin')
+    await c.query(`set local role ${role}`)
+    if (uid) await c.query(`select set_config('request.jwt.claims', $1, true)`, [JSON.stringify({ sub: uid, role })])
     const result = await fn(c)
     await c.query('commit')
     return result
@@ -155,5 +173,70 @@ describe('request_loan', () => {
     expect(results.filter((r) => r.status === 'fulfilled')).toHaveLength(1)
     expect(results.filter((r) => r.status === 'rejected')).toHaveLength(1)
     expect(await loansOf(eq)).toBe(1)
+  })
+})
+
+describe('autenticação e acesso (RLS)', () => {
+  it('CA-08: sem usuário autenticado, request_loan recusa e não cria empréstimo', async () => {
+    const eq = await createEquipment()
+    await expect(
+      asRole('authenticated', null, (c) => c.query('select * from public.request_loan($1)', [eq])),
+    ).rejects.toThrow('Autenticação obrigatória')
+    expect(await loansOf(eq)).toBe(0)
+  })
+
+  it('CA-08: o papel anon (chave pública sem login) não pode chamar request_loan', async () => {
+    const eq = await createEquipment()
+    await expect(
+      asRole('anon', null, (c) => c.query('select * from public.request_loan($1)', [eq])),
+    ).rejects.toThrow(/permission denied/)
+    expect(await loansOf(eq)).toBe(0)
+  })
+
+  it('CA-08: o papel anon não lê empréstimos', async () => {
+    const uid = await createUser()
+    await requestLoan(uid, await createEquipment())
+    // Sem grant: "permission denied". Com o grant padrão do Supabase: a RLS (só `authenticated`) devolve 0 linhas.
+    const lidas = await asRole('anon', null, (c) => c.query('select id from public.loans')).then(
+      (r) => r.rows.length,
+      (e: Error) => {
+        expect(e.message).toMatch(/permission denied/)
+        return 0
+      },
+    )
+    expect(lidas).toBe(0)
+  })
+
+  it('CA-09: um colaborador não lê o empréstimo de outro; o dono lê o próprio', async () => {
+    const a = await createUser()
+    const b = await createUser()
+    const loanA = await requestLoan(a, await createEquipment())
+    const vistoPorB = await asRole('authenticated', b, (c) => c.query('select id from public.loans where id = $1', [loanA.id]))
+    expect(vistoPorB.rows).toHaveLength(0)
+    const vistoPorA = await asRole('authenticated', a, (c) => c.query('select id from public.loans where id = $1', [loanA.id]))
+    expect(vistoPorA.rows).toHaveLength(1)
+  })
+
+  it('CA-09: um colaborador só enxerga os próprios empréstimos na listagem', async () => {
+    const a = await createUser()
+    const b = await createUser()
+    await requestLoan(a, await createEquipment())
+    await requestLoan(b, await createEquipment())
+    const { rows } = await asRole('authenticated', b, (c) => c.query('select borrower_id from public.loans'))
+    expect(rows.length).toBeGreaterThan(0)
+    expect(rows.every((r) => r.borrower_id === b)).toBe(true)
+  })
+
+  it('CA-09: Operações lê os empréstimos de todos', async () => {
+    const a = await createUser()
+    const b = await createUser()
+    const ops = await createUser()
+    await pool.query(`update public.profiles set role = 'operacoes' where id = $1`, [ops])
+    const loanA = await requestLoan(a, await createEquipment())
+    const loanB = await requestLoan(b, await createEquipment())
+    const { rows } = await asRole('authenticated', ops, (c) =>
+      c.query('select id from public.loans where id = any($1)', [[loanA.id, loanB.id]]),
+    )
+    expect(rows).toHaveLength(2)
   })
 })
