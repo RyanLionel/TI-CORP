@@ -118,6 +118,22 @@ describe('GET /equipments', () => {
     })
     expect(res.body.find((e: { id: string }) => e.id === manut)).toMatchObject({ situacao: 'manutencao' })
   })
+  it('CA-10: equipamento com foto devolve imagem { url, fotografo, fonte, licenca } (spec 002)', async () => {
+    const eq = await createEquipment()
+    const fotoId = `api-${randomUUID()}`
+    await pool.query(
+      `update public.equipments set image_path = $2, image_source_id = $3, image_photographer = 'Fotógrafo X',
+         image_source_url = 'https://pixabay.com/photos/x/', image_license = 'Pixabay Content License' where id = $1`,
+      [eq, `teste/${fotoId}.jpg`, fotoId],
+    )
+    const res = await http().get('/equipments').set(auth(a.token))
+    expect(res.body.find((e: { id: string }) => e.id === eq).imagem).toEqual({
+      url: `${supa.url.replace(/\/$/, '')}/storage/v1/object/public/equipamentos/teste/${fotoId}.jpg`,
+      fotografo: 'Fotógrafo X',
+      fonte: 'https://pixabay.com/photos/x/',
+      licenca: 'Pixabay Content License',
+    })
+  })
 })
 
 describe('POST /loans', () => {

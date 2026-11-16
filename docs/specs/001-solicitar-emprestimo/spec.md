@@ -21,7 +21,7 @@ Código existente: `request_loan` e trigger `enforce_loan_rules` em supabase/mig
 
 ## API (contrato)
 Todas exigem `Authorization: Bearer <token do Supabase Auth>`; sem token ou token inválido: 401.
-- `GET /equipments` → lista com `situacao` (`disponivel` | `emprestado` | `manutencao`) e `imagem` (url pública, fotógrafo, fonte) ou `null`.
+- `GET /equipments` → lista com `id`, `nome`, `categoria`, `patrimonio`, `situacao` (`disponivel` | `emprestado` | `manutencao`) e `imagem`: `{ url, fotografo, fonte, licenca }` (url pública no Storage) ou `null` (formato fechado por Ryan em 2026-11-16).
 - `POST /loans` `{ equipmentId: uuid }` → 201 `{ id, equipmentId, dueAt }`; recusa de regra → 409 com `message` em português; body inválido → 400.
 - `GET /loans/me` → empréstimos em aberto do usuário, com `dueAt` e `atrasado`.
 O token é validado perguntando ao Supabase Auth (`/auth/v1/user`); a chamada ao banco roda como o usuário (RLS vale).
