@@ -60,7 +60,7 @@ begin
   select count(*) into open_loans_count
     from public.loans
     where borrower_id = new.borrower_id and returned_at is null;
-  if open_loans_count >= 5 then
+  if open_loans_count >= 6 then
     raise exception 'Limite de 5 empréstimos em aberto atingido';
   end if;
 
