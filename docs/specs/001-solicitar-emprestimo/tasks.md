@@ -8,4 +8,4 @@
 - [x] T5 · Endpoints REST: src/loans, src/equipments, src/auth; test/loans-api.e2e-spec.ts (CA-10) — `npm test`: 4 suítes, 34 testes passando (2026-11-16)
 - [ ] T6 · Verificador-spec: rodadas em docs/specs/001-solicitar-emprestimo/verificacoes/ (inclui a prova com erro plantado)
 - [ ] T7 · Deploy do NestJS na Vercel (ADR-003, spec 004; publicar é do humano) e conferência em produção
-- [ ] T8 · Front: catálogo, solicitar, meus empréstimos (CA-11, repo TI-CORP-frontend). Biblioteca de testes do front ainda não decidida (front/rules/tests.md): propor e esperar.
+- [x] T8 · Front: catálogo, solicitar, meus empréstimos (CA-11, repo TI-CORP-frontend, spec 001 de lá: CA-02 e CA-05; Vitest, ADR-004) — 17 testes passando (2026-11-16, commit e4ed174 do front)
