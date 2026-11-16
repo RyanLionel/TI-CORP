@@ -56,7 +56,9 @@ Este repo é o dono do contrato da API; o front segue o que está aqui.
   Ele não corrige nada: quem corrige é o agente principal.
 
 ## Skills
-- Ficam em skills/<nome>/SKILL.md. Ainda não existe nenhuma.
+- Ficam em skills/<nome>/SKILL.md. Leia só o frontmatter (name, description) de cada uma; carregue o corpo
+  do SKILL.md apenas quando a tarefa casar com a description, e references/ só quando o SKILL.md mandar.
+- skills/imagens-equipamentos — preparar, revisar e enviar as fotos dos equipamentos (spec 002, Pixabay).
 - Em conflito, rules/ e docs/adr/ vencem qualquer skill.
 
 ## Estado atual do projeto
@@ -65,7 +67,7 @@ schema inicial em supabase/migrations/20261001000000_initial_schema.sql (profile
 funções request_loan e return_loan), esqueleto NestJS com GET /health, Prisma 7 (adapter pg) e Jest.
 Não existe (precisa ser recriado; as tarefas foram desmarcadas em 2026-11-16): código das specs 001 a 004 —
 endpoints de empréstimo e catálogo, testes de empréstimo, migrations de crédito de imagem e de regras de empréstimo,
-skills/imagens-equipamentos, scripts/ (seed, imagens, checar-specs), .githooks/, api/index.ts e vercel.json.
+scripts/checar-specs, .githooks/, api/index.ts e vercel.json.
 Também não existe .mcp.json.
 As rodadas em docs/specs/*/verificacoes/ citam commits que não estão no repositório remoto: valem como histórico, não como evidência.
 Lacuna conhecida do schema inicial frente ao PRD: não há bloqueio por atraso (regra 4 da spec 001, migration a recriar).

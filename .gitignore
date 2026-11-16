@@ -20,3 +20,6 @@ __MACOSX/
 vite.config.js
 vite.config.d.ts
 src/generated/
+
+# imagens preparadas pela skill (spec 002); o crédito fica em scripts/dados-iniciais/revisao-imagens.json
+tmp/
