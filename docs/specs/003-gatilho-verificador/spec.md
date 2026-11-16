@@ -1,6 +1,6 @@
 # Spec — Gatilho obrigatório do verificador
 
-> Status: rascunho (2026-11-16). Código recriado; rodada-01 PRONTA no commit 9cd74fc. Volta a pronta depois da rodada 02 no commit final (o teste novo mexe em test/ e src/).
+> Status: pronta (2026-11-16). Recriada em 2026-11-16; verificação: verificacoes/rodada-02.md (PRONTA, commit 6fa1438).
 
 ## Objetivo
 Nenhuma spec é declarada pronta sem uma rodada PRONTA do verificador-spec sobre o código atual, sem depender de alguém lembrar de pedir.

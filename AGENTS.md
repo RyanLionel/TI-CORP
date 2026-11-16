@@ -68,6 +68,6 @@ Existe e passa nos testes locais (64): migrations (inicial, regras de empréstim
 (GET /health, GET /equipments, POST /loans, GET /loans/me, guard do Supabase Auth), seed dos dados iniciais,
 skill imagens-equipamentos (12 fotos aprovadas na revisão humana), gatilho do verificador (pre-commit e
 npm run check:specs) e o handler da Vercel (api/index.ts, vercel.json).
-Specs: todas em rascunho até as rodadas no commit final (003 teve rodada-01 PRONTA). 002 e 004 dependem dos passos de produção (docs/producao.md).
+Specs: 001 e 003 prontas (rodadas no commit 6fa1438). 002 e 004 em rascunho: dependem dos passos de produção (docs/producao.md).
 Nada desta branch foi publicado: produção (Supabase e Vercel) é do humano.
 Não existe: .mcp.json, devolução, tela de Operações.
