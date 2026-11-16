@@ -177,6 +177,12 @@ describe('POST /loans', () => {
     expect(res.body.message).toBe('Equipamento já emprestado')
   })
 
+  it('CA-10: equipamento inexistente devolve 409 "Equipamento não encontrado" (regra 7)', async () => {
+    const res = await http().post('/loans').set(auth(a.token)).send({ equipmentId: randomUUID() })
+    expect(res.status).toBe(409)
+    expect(res.body.message).toBe('Equipamento não encontrado')
+  })
+
   it('CA-05, CA-10: com 5 em aberto, a 6ª devolve 409 com a mensagem de limite', async () => {
     for (let i = 0; i < 5; i++) {
       await http().post('/loans').set(auth(c.token)).send({ equipmentId: await createEquipment() }).expect(201)

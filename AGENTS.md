@@ -63,12 +63,11 @@ Este repo é o dono do contrato da API; o front segue o que está aqui.
 - Em conflito, rules/ e docs/adr/ vencem qualquer skill.
 
 ## Estado atual do projeto
-Existe: PRD, ADR-001 a ADR-003, specs 001 a 004 (documentos), andar zero (AZ-01 a AZ-08 no back; AZ-05 no repo front),
-schema inicial em supabase/migrations/20261001000000_initial_schema.sql (profiles, equipments, loans, RLS,
-funções request_loan e return_loan), esqueleto NestJS com GET /health, Prisma 7 (adapter pg) e Jest.
-Não existe (precisa ser recriado; as tarefas foram desmarcadas em 2026-11-16): código das specs 001 a 004 —
-endpoints de empréstimo e catálogo, testes de empréstimo, migrations de crédito de imagem e de regras de empréstimo,
-scripts/checar-specs e .githooks/ (spec 003). O deploy do NestJS (api/index.ts, vercel.json; spec 004) ainda não foi publicado.
-Também não existe .mcp.json.
-As rodadas em docs/specs/*/verificacoes/ citam commits que não estão no repositório remoto: valem como histórico, não como evidência.
-Lacuna conhecida do schema inicial frente ao PRD: não há bloqueio por atraso (regra 4 da spec 001, migration a recriar).
+Branch de trabalho: recriar-spec-001 (o código original das specs 001 a 004 se perdeu e foi recriado em 2026-11-16).
+Existe e passa nos testes locais (64): migrations (inicial, regras de empréstimo, imagem e crédito), API NestJS
+(GET /health, GET /equipments, POST /loans, GET /loans/me, guard do Supabase Auth), seed dos dados iniciais,
+skill imagens-equipamentos (12 fotos aprovadas na revisão humana), gatilho do verificador (pre-commit e
+npm run check:specs) e o handler da Vercel (api/index.ts, vercel.json).
+Specs: todas em rascunho até as rodadas no commit final (003 teve rodada-01 PRONTA). 002 e 004 dependem dos passos de produção (docs/producao.md).
+Nada desta branch foi publicado: produção (Supabase e Vercel) é do humano.
+Não existe: .mcp.json, devolução, tela de Operações.
