@@ -11,7 +11,9 @@
     "db:reset": "supabase db reset",
     "db:pull": "prisma db pull && prisma generate",
     "postinstall": "prisma generate",
-    "test": "jest --config jest.config.cjs"
+    "test": "jest --config jest.config.cjs",
+    "seed:local": "node scripts/seed-dados-iniciais.mjs --local",
+    "seed:dados-iniciais": "node scripts/seed-dados-iniciais.mjs"
   },
   "dependencies": {
     "@nestjs/common": "11.2.8",
