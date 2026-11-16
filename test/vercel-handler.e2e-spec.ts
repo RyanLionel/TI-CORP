@@ -1,6 +1,6 @@
 import { createServer, Server } from 'node:http'
 import request from 'supertest'
-import handler from '../api/index'
+import handler, { encerrar } from '../api/index'
 
 // Spec 004 (CA-01/CA-02): o handler da Vercel atende pelo mesmo Nest, sem listen(). Banco LOCAL (rules/tests.md).
 describe('handler serverless da Vercel (spec 004)', () => {
@@ -9,7 +9,10 @@ describe('handler serverless da Vercel (spec 004)', () => {
     process.env.DATABASE_URL = 'postgresql://postgres:postgres@127.0.0.1:54322/postgres'
     server = createServer((req, res) => { handler(req, res).catch(() => { res.statusCode = 500; res.end() }) })
   })
-  afterAll(() => new Promise((r) => server.close(() => r(undefined))))
+  afterAll(async () => {
+    await new Promise((r) => server.close(() => r(undefined)))
+    await encerrar()
+  })
 
   it('CA-01: GET /health pelo handler devolve 200 com status e banco', async () => {
     const res = await request(server).get('/health')
