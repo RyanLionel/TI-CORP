@@ -16,7 +16,7 @@ Código existente: `request_loan` e trigger `enforce_loan_rules` em supabase/mig
 4. Quem tem empréstimo em atraso (`due_at` < agora e sem devolução) não pode solicitar outro. Exige migration nova: o schema atual não impõe isso.
 5. Equipamento em manutenção ou já emprestado é recusado.
 6. Dois pedidos simultâneos ao mesmo equipamento: só um é criado (índice único `loans_one_open_per_equipment`).
-7. Toda recusa devolve o motivo em português: indisponível, limite atingido ou atraso pendente.
+7. Toda recusa devolve o motivo em português: indisponível (em manutenção ou já emprestado), limite atingido, atraso pendente ou equipamento não encontrado.
 8. O colaborador só enxerga os próprios empréstimos (RLS `loans_read_borrower_or_operations`).
 
 ## API (contrato)
@@ -24,7 +24,7 @@ Todas exigem `Authorization: Bearer <token do Supabase Auth>`; sem token ou toke
 - `GET /equipments` → lista com `id`, `nome`, `categoria`, `patrimonio`, `situacao` (`disponivel` | `emprestado` | `manutencao`) e `imagem`: `{ url, fotografo, fonte, licenca }` (url pública no Storage) ou `null` (formato fechado por Ryan em 2026-11-16).
 - `POST /loans` `{ equipmentId: uuid }` → 201 `{ id, equipmentId, dueAt }`; recusa de regra → 409 com `message` em português; body inválido → 400.
 - `GET /loans/me` → empréstimos em aberto do usuário, com `dueAt` e `atrasado`.
-O token é validado perguntando ao Supabase Auth (`/auth/v1/user`); a chamada ao banco roda como o usuário (RLS vale).
+O token é validado perguntando ao Supabase Auth (`/auth/v1/user`); as chamadas de `POST /loans` e `GET /loans/me` rodam como o usuário (RLS vale). Exceção: `GET /equipments` lê com a conexão da API para calcular `situacao` (plan.md, item 3), porque a RLS não deixa o colaborador ver empréstimo alheio; só sai o booleano "tem empréstimo em aberto", nenhum dado de outra pessoa.
 
 ## Critérios de aceitação
 - CA-01 · Solicitar equipamento disponível cria 1 empréstimo com `borrower_id` do usuário logado e `due_at` = agora + 14 dias úteis.
@@ -50,6 +50,12 @@ O token é validado perguntando ao Supabase Auth (`/auth/v1/user`); a chamada ao
 - Dias úteis contados no fuso America/Sao_Paulo (em UTC, um pedido à noite cairia no dia seguinte).
 - Ordem das recusas: problema do equipamento (manutenção, já emprestado) antes do problema da pessoa (atraso, limite).
 - Corrida entre dois pedidos (CA-07): o índice único `loans_one_open_per_equipment` barra o segundo; a API traduz a violação de unicidade (23505) para 409 "Equipamento já emprestado".
+
+## Decisões (Ryan, 2026-11-16, depois da rodada 04 do verificador)
+- Equipamento inexistente (UUID válido, desconhecido): 409 "Equipamento não encontrado", e não 404, porque o contrato só lista 400, 401 e 409; o motivo entra na regra 7.
+- `GET /loans/me` devolve só `id`, `equipmentId`, `dueAt` e `atrasado` (contrato); o front cruza com o catálogo para mostrar o nome.
+- A exceção de `GET /equipments` (consulta sem `asUser`) fica escrita no contrato.
+- Teste novo: empréstimo devolvido não aparece em `GET /loans/me` (lacuna apontada pela rodada 04).
 
 ## Fora de escopo / não decidido
 Devolução, tela de Operações, cadastro de equipamento, reserva futura, notificação por e-mail, renovação, aprovação e fila. Formato de erro da API ainda não decidido (ADR-001).

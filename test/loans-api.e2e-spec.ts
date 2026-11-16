@@ -211,4 +211,14 @@ describe('GET /loans/me', () => {
     expect(deC.body).toHaveLength(5)
     expect(deC.body.every((l: { atrasado: boolean }) => l.atrasado === false)).toBe(true)
   })
+
+  it('CA-10: empréstimo devolvido não aparece em GET /loans/me', async () => {
+    const eq = await createEquipment()
+    const criado = await http().post('/loans').set(auth(b.token)).send({ equipmentId: eq })
+    expect(criado.status).toBe(201)
+    await pool.query('update public.loans set returned_at = now() where id = $1', [criado.body.id])
+    const res = await http().get('/loans/me').set(auth(b.token))
+    expect(res.status).toBe(200)
+    expect(res.body.map((l: { id: string }) => l.id)).not.toContain(criado.body.id)
+  })
 })
