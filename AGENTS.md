@@ -67,7 +67,7 @@ schema inicial em supabase/migrations/20261001000000_initial_schema.sql (profile
 funções request_loan e return_loan), esqueleto NestJS com GET /health, Prisma 7 (adapter pg) e Jest.
 Não existe (precisa ser recriado; as tarefas foram desmarcadas em 2026-11-16): código das specs 001 a 004 —
 endpoints de empréstimo e catálogo, testes de empréstimo, migrations de crédito de imagem e de regras de empréstimo,
-scripts/checar-specs, .githooks/, api/index.ts e vercel.json.
+scripts/checar-specs e .githooks/ (spec 003). O deploy do NestJS (api/index.ts, vercel.json; spec 004) ainda não foi publicado.
 Também não existe .mcp.json.
 As rodadas em docs/specs/*/verificacoes/ citam commits que não estão no repositório remoto: valem como histórico, não como evidência.
 Lacuna conhecida do schema inicial frente ao PRD: não há bloqueio por atraso (regra 4 da spec 001, migration a recriar).

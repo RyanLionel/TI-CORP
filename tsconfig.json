@@ -5,5 +5,5 @@
     "emitDecoratorMetadata": true, "outDir": "dist", "rootDir": ".", "types": ["node", "jest"],
     "forceConsistentCasingInFileNames": true, "incremental": false
   },
-  "include": ["src", "test", "prisma.config.ts"]
+  "include": ["src", "test", "api", "prisma.config.ts"]
 }
