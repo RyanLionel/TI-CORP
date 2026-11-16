@@ -6,8 +6,9 @@ https://github.com/RyanLionel/TI-CORP-frontend.
 
 ## Onde olhar
 - docs/PRD.md — o que o negócio precisa. Não é spec. Tem perguntas em aberto.
-- docs/adr/ — decisões técnicas e o motivo delas (001 stack).
-- docs/specs/<NNN-nome>/ — spec, plano e tarefas de cada funcionalidade (001 solicitar empréstimo, rascunho).
+- docs/adr/ — decisões técnicas e o motivo delas (001 stack, 002 sharp, 003 NestJS na Vercel).
+- docs/specs/<NNN-nome>/ — spec, plano e tarefas de cada funcionalidade (001 solicitar empréstimo, 002 dados iniciais, 003 gatilho do verificador, 004 deploy na Vercel).
+- docs/producao.md — passos em produção que só o humano executa.
 - docs/andar-zero.md — critérios AZ-01 a AZ-08 que provam a stack. Não é feature.
 - rules/restrictions.md — leia sempre, antes de qualquer tarefa. As demais
   rules têm gatilho próprio (campo "Quando").
@@ -59,8 +60,12 @@ Este repo é o dono do contrato da API; o front segue o que está aqui.
 - Em conflito, rules/ e docs/adr/ vencem qualquer skill.
 
 ## Estado atual do projeto
-Existe: PRD (rascunho), ADR-001, spec 001 (rascunho), andar zero (AZ-01 a AZ-08 atendidos no back; AZ-05 no repo front),
+Existe: PRD, ADR-001 a ADR-003, specs 001 a 004 (documentos), andar zero (AZ-01 a AZ-08 no back; AZ-05 no repo front),
 schema inicial em supabase/migrations/20261001000000_initial_schema.sql (profiles, equipments, loans, RLS,
 funções request_loan e return_loan), esqueleto NestJS com GET /health, Prisma 7 (adapter pg) e Jest.
-Não existe: endpoints de funcionalidade, skills/, .mcp.json, deploy do NestJS na Vercel (não decidido).
-Lacunas conhecidas do schema frente ao PRD: não há bloqueio por atraso.
+Não existe (precisa ser recriado; as tarefas foram desmarcadas em 2026-11-16): código das specs 001 a 004 —
+endpoints de empréstimo e catálogo, testes de empréstimo, migrations de crédito de imagem e de regras de empréstimo,
+skills/imagens-equipamentos, scripts/ (seed, imagens, checar-specs), .githooks/, api/index.ts e vercel.json.
+Também não existe .mcp.json.
+As rodadas em docs/specs/*/verificacoes/ citam commits que não estão no repositório remoto: valem como histórico, não como evidência.
+Lacuna conhecida do schema inicial frente ao PRD: não há bloqueio por atraso (regra 4 da spec 001, migration a recriar).

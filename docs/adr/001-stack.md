@@ -65,7 +65,7 @@ na Vercel, um por repositório, e um projeto Supabase como banco.
 - Unificar os repositórios sem reorganizar pipelines e variáveis de ambiente.
 
 ## O que este ADR NÃO decide
-- Como o NestJS roda na Vercel (função serverless ou outro formato).
+- Como o NestJS roda na Vercel: decidido no ADR-003 (função serverless).
 - Biblioteca de testes do front.
 - Estrutura interna de pastas e módulos do NestJS (vira ADR-003 se for cara de mudar).
 - Formato de erro da API.

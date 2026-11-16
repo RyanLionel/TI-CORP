@@ -576,15 +576,20 @@ model webauthn_credentials {
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model equipments {
-  id          String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  nome        String
-  categoria   equipment_category
-  patrimonio  String?             @unique(map: "equipments_patrimonio_unique", where: raw("(patrimonio IS NOT NULL)"))
-  condition   equipment_condition @default(disponivel)
-  observacoes String?
-  created_at  DateTime            @default(now()) @db.Timestamptz(6)
-  updated_at  DateTime            @default(now()) @db.Timestamptz(6)
-  loans       loans?
+  id                 String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nome               String
+  categoria          equipment_category
+  patrimonio         String?             @unique(map: "equipments_patrimonio_unique", where: raw("(patrimonio IS NOT NULL)"))
+  condition          equipment_condition @default(disponivel)
+  observacoes        String?
+  created_at         DateTime            @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime            @default(now()) @db.Timestamptz(6)
+  image_path         String?
+  image_pexels_id    BigInt?             @unique(map: "equipments_image_pexels_id_unique", where: raw("(image_pexels_id IS NOT NULL)"))
+  image_photographer String?
+  image_source_url   String?
+  image_license      String?
+  loans              loans?
 
   @@index([categoria, condition], map: "equipments_by_category_and_condition")
   @@schema("public")

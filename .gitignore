@@ -13,7 +13,7 @@ dist/
 __MACOSX/
 
 # rascunho de sessão (aula 3: handoff é efêmero, não versiona)
-handoff.md
+/handoff.md
 
 # artefatos do `tsc -b`
 *.tsbuildinfo

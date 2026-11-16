@@ -19,7 +19,7 @@ Ao iniciar qualquer funcionalidade nova do PRD.
    num commit.
 5. Uma tarefa por vez. Ao terminar, siga rules/checks.md.
 6. Ao terminar todas as tarefas, acione o subagente verificador-spec
-   (agents/verificador-spec.md) antes de declarar a spec pronta.
+   (.claude/agents/verificador-spec.md), salve a resposta em docs/specs/<spec>/verificacoes/rodada-NN.md e só então marque "> Status: pronta" na spec. `npm run check:specs` (pre-commit) barra spec pronta sem rodada PRONTA do commit atual — vale quando a spec 003 estiver implementada; até lá, a conferência é manual.
 
 ## Verificação
 Toda spec tem Objetivo, Vínculo, Regras, Critérios de aceitação com

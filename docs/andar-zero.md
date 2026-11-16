@@ -25,4 +25,4 @@ Isto não é uma spec: não há comportamento de produto. É a verificação de 
 Qualquer funcionalidade do PRD.
 
 ## Não decidido ainda
-Organização de pastas do NestJS (possível ADR-003); como o NestJS roda na Vercel.
+Organização de pastas do NestJS: proposta em docs/plan-andar-zero.md, sem ADR. Como o NestJS roda na Vercel foi decidido no ADR-003.

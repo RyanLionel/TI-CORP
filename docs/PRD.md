@@ -14,15 +14,15 @@ mostra quem está com o quê nem o que está atrasado.
 **Acesso.** Duas pessoas entram no sistema: o Colaborador e a pessoa de Operações.
 Cada pessoa vê apenas os próprios empréstimos; só Operações vê todos.
 
-**Catálogo.** O colaborador vê os equipamentos, com situação: disponível,
+**Catálogo.** O colaborador vê os equipamentos, com foto e crédito "Fotos: Pixabay" (link) e situação: disponível,
 emprestado ou em manutenção. Pode buscar por nome e patrimônio e filtrar por situação.
 
 **Solicitar.** O colaborador solicita um equipamento disponível e o empréstimo
-nasce na hora, sem aprovação. O prazo de devolução é de 14 dias (confirmar: corridos ou úteis).
+nasce na hora, sem aprovação. O prazo de devolução é de 14 dias úteis (segunda a sexta, sem considerar feriados; decidido por Ryan em 2026-11-10 e confirmado em 2026-11-11).
 
-**Limite.** Cada pessoa pode ter no máximo 3 equipamentos emprestados ao mesmo tempo (confirmar).
+**Limite.** Cada pessoa pode ter no máximo 5 equipamentos em aberto ao mesmo tempo, contando os que estão em atraso (decidido por Ryan em 2026-11-10).
 
-**Atraso.** Quem tem empréstimo em atraso não pode solicitar outro (confirmar).
+**Atraso.** Quem tem empréstimo em atraso não pode solicitar outro.
 
 **Manutenção.** Equipamento em manutenção não pode ser solicitado. Equipamento
 emprestado não pode ir para manutenção.
@@ -49,10 +49,15 @@ devolução de qualquer empréstimo, no balcão.
 - Fluxo de aprovação e fila de espera
 
 ## Perguntas em aberto
-1. Prazo de 14 dias: corridos ou úteis? (o schema atual usa corridos)
-2. Limite de empréstimos em aberto: 3 (layout e schema)? Confirmar com Operações.
-3. O bloqueio por atraso ainda não está no schema (só o limite e a disponibilidade são impostos); entra na spec de solicitar.
-4. Quem define o papel Operações e como ele é concedido?
+Nenhuma no momento.
+
+## Decisões fechadas
+- Prazo de 14 dias úteis, limite de 5 empréstimos em aberto (atrasados contam), bloqueio por atraso.
+- Feriados não entram na contagem dos 14 dias úteis (só sábado e domingo; Ryan delegou e o agente decidiu em 2026-11-11, revisar). Motivo: não há calendário de feriados na stack e o prazo é folga, não cobrança. Se o negócio exigir feriados, vira spec nova com tabela de feriados.
+- Papel Operações: não se concede pela aplicação nesta versão. Quem administra o Supabase atribui `role = 'operacoes'` em `profiles` por migration ou SQL do humano; todo usuário nasce Colaborador (default do schema). Motivo: auto-concessão pela API abriria escalada de privilégio, e a tela de Operações está fora do escopo (Ryan delegou, agente decidiu em 2026-11-11, revisar).
+- Dados iniciais: 12 equipamentos, 3 em manutenção (TI-0004, TI-0007, TI-0010).
+- Fotos dos equipamentos vêm do Pixabay, com crédito "Fotos: Pixabay" na tela (Ryan, 2026-11-16, por orientação do professor; antes era Pexels).
+
 ---
 Este documento descreve o que o negócio precisa. Decisões de tecnologia,
 modelagem e arquitetura são responsabilidade da engenharia (ver docs/adr/).
