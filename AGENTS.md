@@ -51,7 +51,8 @@ Este repo é o dono do contrato da API; o front segue o que está aqui.
 - Spec com critérios CA-xx; teste e commit citam o CA que atendem.
 
 ## Subagentes
-- agents/verificador-spec.md — confere uma spec contra a implementação.
+- agents/verificador-spec.md — confere uma spec contra a implementação. Fonte do subagente;
+  `.claude/agents/verificador-spec.md` é a cópia que o harness (Claude Code e Cursor) lê: edite a fonte e copie.
   Obrigatório antes de declarar qualquer spec pronta (rules/spec-flow.md).
   Ele não corrige nada: quem corrige é o agente principal.
 
