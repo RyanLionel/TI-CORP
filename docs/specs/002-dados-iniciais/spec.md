@@ -37,6 +37,9 @@ PRD: Equipamentos, Autenticação · ADRs: ADR-001 (Supabase Auth, migrations SQ
 - Fonte das imagens trocada de Pexels para Pixabay por orientação do professor (motivo: o Pexels não vai poder ser usado). Contraria o contrato da Entrega 2 da prática, que exigia só a API do Pexels; registrar em ENTREGA.md, seção 1.
 - A API do Pixabay não permite hotlinking: as imagens são baixadas e servidas do bucket do Supabase (regra 6, sem mudança).
 - A tela que exibe as fotos mostra "Fotos: Pixabay" com link (a API pede que o usuário veja de onde vieram as imagens). PRD e spec 001 atualizados.
+- Termos de busca (campo `busca` de `scripts/dados-iniciais/equipamentos.json`) trocados para TI-0004, TI-0005, TI-0006, TI-0007, TI-0011 e TI-0012: no Pixabay os termos da lista da prática trouxeram, em duas rodadas, pessoa, logo legível (iMac, Lenovo, Olympus, Fujifilm) ou objeto errado. Nome, categoria e situação não mudaram. Contraria "use exatamente esta" lista da prática; registrar em ENTREGA.md, seção 1. Histórico das fotos reprovadas e motivos: `scripts/dados-iniciais/revisao-imagens.json` (`reprovadas[]`).
+- Revisão visual: as decisões de aprovar ou reprovar são do Ryan; nas rodadas 1 e 2 o agente fez uma pré-triagem e transcreveu no arquivo a decisão que o Ryan deu no chat.
+- TI-0012 (câmera compacta): aceita a foto Pixabay 9341083 (Ryan, 2026-11-16). Exceção registrada ao CA-10: o anel da lente tem o nome da lente gravado em letras pequenas, legível só com zoom na imagem 800x600 e ilegível no cartão do catálogo. Motivo: no Pixabay, quase toda câmera compacta traz marca grande; as opções sem inscrição nenhuma não apareceram em 4 rodadas.
 - Chave em `PIXABAY_API_KEY`: `.env` local e `.env.example` (sem valor). Não vai ao painel da Vercel: só os scripts de preparo, rodados localmente, usam a chave.
 
 ## Fora de escopo

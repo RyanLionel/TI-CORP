@@ -1,0 +1,212 @@
+{
+  "TI-0001": {
+    "source_id": "2982270",
+    "fotografo": "ClickerHappy",
+    "source_url": "https://pixabay.com/photos/computer-laptop-work-place-mouse-2982270/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": [
+      {
+        "source_id": "7188564",
+        "motivo": "objeto errado: xícara"
+      }
+    ]
+  },
+  "TI-0002": {
+    "source_id": "791032",
+    "fotografo": "kaboompics",
+    "source_url": "https://pixabay.com/photos/technology-laptop-computer-netbook-791032/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": [
+      {
+        "source_id": "2511065",
+        "motivo": "objeto errado: óculos e caderno"
+      }
+    ]
+  },
+  "TI-0003": {
+    "source_id": "6801339",
+    "fotografo": "Mariakray",
+    "source_url": "https://pixabay.com/photos/electronics-technology-devices-6801339/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": [
+      {
+        "source_id": "886462",
+        "motivo": "logo do Windows legível no teclado"
+      },
+      {
+        "source_id": "785742",
+        "motivo": "só o teclado, não mostra o notebook"
+      }
+    ]
+  },
+  "TI-0004": {
+    "source_id": "3659998",
+    "fotografo": "athree23",
+    "source_url": "https://pixabay.com/photos/surface-book-microsoft-closed-side-3659998/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": [
+      {
+        "source_id": "4906312",
+        "motivo": "pessoa na foto"
+      },
+      {
+        "source_id": "2242213",
+        "motivo": "objeto errado: café, só a quina do notebook"
+      }
+    ]
+  },
+  "TI-0005": {
+    "source_id": "17768",
+    "fotografo": "PublicDomainPictures",
+    "source_url": "https://pixabay.com/photos/blank-business-computer-desktop-17768/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": [
+      {
+        "source_id": "4532323",
+        "motivo": "logo da Apple legível"
+      },
+      {
+        "source_id": "1207834",
+        "motivo": "logo da Apple legível"
+      },
+      {
+        "source_id": "4623184",
+        "motivo": "objeto errado: caixa de som"
+      },
+      {
+        "source_id": "4962269",
+        "motivo": "computadores antigos com texto na tela"
+      }
+    ]
+  },
+  "TI-0006": {
+    "source_id": "17894",
+    "fotografo": "PublicDomainPictures",
+    "source_url": "https://pixabay.com/photos/blank-business-computer-desktop-17894/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": [
+      {
+        "source_id": "4795762",
+        "motivo": "tela com código; é notebook, não monitor"
+      },
+      {
+        "source_id": "1283672",
+        "motivo": "logo da Apple legível"
+      }
+    ]
+  },
+  "TI-0007": {
+    "source_id": "7663828",
+    "fotografo": "Artist_atsite",
+    "source_url": "https://pixabay.com/photos/collection-communication-computer-7663828/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": [
+      {
+        "source_id": "6801334",
+        "motivo": "objeto errado: celular"
+      },
+      {
+        "source_id": "865091",
+        "motivo": "objeto errado: celular e notebook"
+      },
+      {
+        "source_id": "820277",
+        "motivo": "logos Apple e Beats legíveis"
+      },
+      {
+        "source_id": "5050543",
+        "motivo": "logo ECCO legível"
+      }
+    ]
+  },
+  "TI-0008": {
+    "source_id": "2202226",
+    "fotografo": "WikimediaImages",
+    "source_url": "https://pixabay.com/photos/hdmi-connector-cable-plug-2202226/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": []
+  },
+  "TI-0009": {
+    "source_id": "7066127",
+    "fotografo": "Alexandra_Koch",
+    "source_url": "https://pixabay.com/photos/cable-charging-cable-usb-7066127/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": [
+      {
+        "source_id": "4875319",
+        "motivo": "não é cabo USB-C"
+      }
+    ]
+  },
+  "TI-0010": {
+    "source_id": "494649",
+    "fotografo": "blickpixel",
+    "source_url": "https://pixabay.com/photos/network-cable-cable-patch-494649/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": []
+  },
+  "TI-0011": {
+    "source_id": "8670926",
+    "fotografo": "MrTozzo",
+    "source_url": "https://pixabay.com/photos/camera-photography-photographer-8670926/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": [
+      {
+        "source_id": "1155173",
+        "motivo": "objeto errado e logo Lenovo legível"
+      },
+      {
+        "source_id": "2937216",
+        "motivo": "pessoa na foto"
+      }
+    ]
+  },
+  "TI-0012": {
+    "source_id": "9341083",
+    "fotografo": "ZT_OSCAR",
+    "source_url": "https://pixabay.com/photos/analog-camera-camera-vintage-9341083/",
+    "licenca": "Pixabay Content License",
+    "aprovada": true,
+    "motivo": "",
+    "reprovadas": [
+      {
+        "source_id": "541213",
+        "motivo": "logo Olympus legível"
+      },
+      {
+        "source_id": "1362419",
+        "motivo": "logo Fujifilm legível"
+      },
+      {
+        "source_id": "4532567",
+        "motivo": "logo Fujifilm legível"
+      },
+      {
+        "source_id": "3545828",
+        "motivo": "logo e texto Pentax legíveis"
+      }
+    ]
+  }
+}
