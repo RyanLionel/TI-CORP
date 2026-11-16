@@ -10,7 +10,7 @@ Prática (Entrega 1, "Obrigatório") · rules/spec-flow.md · .claude/agents/ver
 
 ## Regras
 1. Spec com `> Status: pronta` exige `verificacoes/rodada-NN.md` com `Veredito: PRONTA` e `Commit: <sha>`.
-2. Se `src/ test/ supabase/ scripts/ skills/ prisma/` mudou depois desse commit, a verificação é inválida.
+2. Se `src/ test/ api/ supabase/ scripts/ skills/ prisma/` mudou depois desse commit (inclusive mudança ainda não commitada), a verificação é inválida. (`api/` entrou em 2026-11-16, com a spec 004.)
 3. O script roda no pre-commit (`.githooks`, ativado pelo `postinstall`) e como `npm run check:specs`.
 4. Limite conhecido: hook local pode ser pulado com `--no-verify`; sem CI no repo isso é o melhor possível sem nova dependência.
 

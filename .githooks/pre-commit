@@ -1,0 +1,3 @@
+#!/bin/sh
+# Spec 003: nenhuma spec "pronta" sem rodada PRONTA do verificador sobre o código atual.
+node scripts/checar-specs.mjs

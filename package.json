@@ -10,7 +10,7 @@
     "db:down": "supabase stop",
     "db:reset": "supabase db reset",
     "db:pull": "prisma db pull && prisma generate",
-    "postinstall": "prisma generate",
+    "postinstall": "node -e \"try{require('child_process').execSync('git config core.hooksPath .githooks',{stdio:'ignore'})}catch{}\" && prisma generate",
     "test": "jest --config jest.config.cjs",
     "seed:local": "node scripts/seed-dados-iniciais.mjs --local",
     "seed:dados-iniciais": "node scripts/seed-dados-iniciais.mjs",
@@ -18,7 +18,8 @@
     "imagens:enviar:local": "node skills/imagens-equipamentos/scripts/enviar-imagens.mjs --local",
     "imagens:enviar": "node skills/imagens-equipamentos/scripts/enviar-imagens.mjs",
     "imagens:candidatos": "node skills/imagens-equipamentos/scripts/candidatos-imagens.mjs",
-    "imagens:escolher": "node skills/imagens-equipamentos/scripts/escolher-imagem.mjs"
+    "imagens:escolher": "node skills/imagens-equipamentos/scripts/escolher-imagem.mjs",
+    "check:specs": "node scripts/checar-specs.mjs"
   },
   "dependencies": {
     "@nestjs/common": "11.2.8",
