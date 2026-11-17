@@ -1,6 +1,6 @@
 # Spec — Solicitar empréstimo
 
-> Status: pronta (2026-11-16). Código recriado em 2026-11-16; verificação: verificacoes/rodada-06.md (PRONTA, commit 6fa1438). CA-11 conferido no front (spec 001, rodada-02, commit c5c59c3). Erro plantado: rodadas 03 e 04.
+> Status: rascunho (2026-11-17), reverificação pendente: a spec 005 mexeu em src/loans e test/. Antes: pronta, 2026-11-16. Código recriado em 2026-11-16; verificação: verificacoes/rodada-06.md (PRONTA, commit 6fa1438). CA-11 conferido no front (spec 001, rodada-02, commit c5c59c3). Erro plantado: rodadas 03 e 04.
 
 ## Objetivo
 O colaborador logado solicita um equipamento disponível e o empréstimo é criado na hora, sem aprovação.

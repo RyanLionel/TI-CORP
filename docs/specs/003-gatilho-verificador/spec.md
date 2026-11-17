@@ -1,6 +1,6 @@
 # Spec — Gatilho obrigatório do verificador
 
-> Status: pronta (2026-11-16). Recriada em 2026-11-16; verificação: verificacoes/rodada-02.md (PRONTA, commit 6fa1438).
+> Status: rascunho (2026-11-17), reverificação pendente: a spec 005 mexeu em src/loans e test/. Antes: pronta, 2026-11-16. Recriada em 2026-11-16; verificação: verificacoes/rodada-02.md (PRONTA, commit 6fa1438).
 
 ## Objetivo
 Nenhuma spec é declarada pronta sem uma rodada PRONTA do verificador-spec sobre o código atual, sem depender de alguém lembrar de pedir.

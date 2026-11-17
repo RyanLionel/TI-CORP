@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common'
+import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
 
 // Mensagens que o banco devolve nas recusas de regra (migration regras_solicitar_emprestimo). Viram 409.
@@ -32,6 +32,13 @@ export function ruleRefusal(e: unknown): string | null {
   return null
 }
 
+// Spec 005: recusas da função public.return_loan (schema inicial) e o status HTTP de cada uma.
+const RETURN_REFUSALS: [string, (m: string) => Error][] = [
+  ['Empréstimo não encontrado', (m) => new NotFoundException(m)],
+  ['Empréstimo já devolvido', (m) => new ConflictException(m)],
+  ['Sem permissão para registrar esta devolução', (m) => new ForbiddenException(m)],
+]
+
 type LoanRow = { id: string; equipment_id: string; due_at: Date }
 type MyLoanRow = LoanRow & { atrasado: boolean }
 
@@ -48,6 +55,20 @@ export class LoansService {
     } catch (e) {
       const motivo = ruleRefusal(e)
       if (motivo) throw new ConflictException(motivo)
+      throw e
+    }
+  }
+
+  async giveBack(userId: string, loanId: string) {
+    try {
+      const [loan] = await this.db.asUser(userId, (tx) =>
+        tx.$queryRaw<{ id: string; returned_at: Date }[]>`select id, returned_at from public.return_loan(${loanId}::uuid)`,
+      )
+      return { id: loan.id, returnedAt: new Date(loan.returned_at).toISOString() }
+    } catch (e) {
+      const text = errorText(e)
+      const found = RETURN_REFUSALS.find(([m]) => text.includes(m))
+      if (found) throw found[1](found[0])
       throw e
     }
   }
