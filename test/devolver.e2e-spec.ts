@@ -116,6 +116,18 @@ describe('POST /loans/:id/return (spec 005)', () => {
     expect(rows[0].returned_at).toBeNull()
   })
 
+  it('CA-03: nem um usuário de Operações devolve o empréstimo de outra pessoa por esta rota (regra 2)', async () => {
+    const a = await signUp()
+    const op = await signUp()
+    await pool.query('update public.profiles set role = \'operacoes\' where id = $1', [op.id])
+    const loanId = await pedir(a.token, await createEquipment())
+    const res = await http().post(`/loans/${loanId}/return`).set(auth(op.token))
+    expect(res.status).toBe(403)
+    expect(res.body.message).toBe('Sem permissão para registrar esta devolução')
+    const { rows } = await pool.query('select returned_at from public.loans where id = $1', [loanId])
+    expect(rows[0].returned_at).toBeNull()
+  })
+
   it('CA-04: devolver de novo um empréstimo já devolvido devolve 409', async () => {
     const a = await signUp()
     const loanId = await pedir(a.token, await createEquipment())

@@ -60,6 +60,12 @@ export class LoansService {
   }
 
   async giveBack(userId: string, loanId: string) {
+    // Regra 2: só quem pegou devolve por esta rota. A função return_loan também aceita Operações
+    // (devolução no balcão, fora de escopo), então o dono é conferido aqui, antes de chamar o banco.
+    const [dono] = await this.db.$queryRaw<{ borrower_id: string }[]>`
+      select borrower_id from public.loans where id = ${loanId}::uuid`
+    if (!dono) throw new NotFoundException('Empréstimo não encontrado')
+    if (dono.borrower_id !== userId) throw new ForbiddenException('Sem permissão para registrar esta devolução')
     try {
       const [loan] = await this.db.asUser(userId, (tx) =>
         tx.$queryRaw<{ id: string; returned_at: Date }[]>`select id, returned_at from public.return_loan(${loanId}::uuid)`,

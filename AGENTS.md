@@ -64,10 +64,10 @@ Este repo é o dono do contrato da API; o front segue o que está aqui.
 
 ## Estado atual do projeto
 Branch de trabalho: recriar-spec-001 (o código original das specs 001 a 004 se perdeu e foi recriado em 2026-11-16).
-Existe e passa nos testes locais (64): migrations (inicial, regras de empréstimo, imagem e crédito), API NestJS
-(GET /health, GET /equipments, POST /loans, GET /loans/me, guard do Supabase Auth), seed dos dados iniciais,
+Existe e passa nos testes locais (72): migrations (inicial, regras de empréstimo, imagem e crédito), API NestJS
+(GET /health, GET /equipments, POST /loans, GET /loans/me, POST /loans/:id/return, guard do Supabase Auth), seed dos dados iniciais,
 skill imagens-equipamentos (12 fotos aprovadas na revisão humana), gatilho do verificador (pre-commit e
 npm run check:specs) e o handler da Vercel (api/index.ts, vercel.json).
-Specs: 001 e 003 prontas (rodadas no commit 6fa1438). 002 e 004 em rascunho: dependem dos passos de produção (docs/producao.md).
-Nada desta branch foi publicado: produção (Supabase e Vercel) é do humano.
-Não existe: .mcp.json, devolução, tela de Operações.
+Specs: 001 e 003 aguardam rodada no commit da correção da 005 (estavam PRONTA em fe3fde1). 005 (devolver) com rodada-01 NÃO PRONTA, corrigida. 002 e 004 dependem da conferência de produção.
+Produção publicada em 2026-11-17 com autorização do Ryan: Supabase PRATICKS, ti-corp.vercel.app e ti-corp-frontend.vercel.app.
+Não existe: .mcp.json, tela de Operações (devolução no balcão).
