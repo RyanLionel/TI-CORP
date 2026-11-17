@@ -22,3 +22,5 @@ O ADR-001 fixa Vercel para os dois repos, mas não dizia como o NestJS roda lá.
 - Conexões ao Postgres só pelo pooler de transação; conexão direta esgotaria o limite.
 - Variáveis na Vercel do back: `DATABASE_URL`, `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `FRONT_ORIGIN` (nunca a service_role: ela só serve aos scripts do humano).
 - Só a execução local do handler foi provada (test/vercel-handler.e2e-spec.ts). Que funciona na Vercel só se sabe depois do deploy; o humano confere `GET /health` no link.
+
+**Nota (2026-11-17):** o primeiro deploy de produção falhou com "No Output Directory named public": o projeto na Vercel está como framework "Other" e exige uma pasta de saída estática. Solução: `public/robots.txt` (bloqueia indexação). Os arquivos estáticos não contêm código nem segredo; toda rota que não é arquivo segue o rewrite para `/api`.
